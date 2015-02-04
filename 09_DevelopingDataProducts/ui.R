@@ -1,17 +1,23 @@
 library(shiny)
+
 shinyUI(
   pageWithSidebar(
-  headerPanel("Data science!"),
+  headerPanel("Calculate BMI!"),
   sidebarPanel(
-    numericInput('id1',"Nisses",90,min=50,max=200,step=5),
-    submitButton("Send")
+      numericInput('weight',"Weight (lbs or kg)",75,min=30,max=500,step=5),
+      radioButtons("wtype","Lbs or kg",choices = c("Lbs","kg"),selected = "kg"),
+      numericInput('height',"Height (feet, cm or inches)",175,min=30,max=200,step=5),
+      radioButtons("htype","Feet, cm or inches",choices = c("Feet","cm","Inches"),selected = "cm"),
+      submitButton("Send")
     )
   ,
   mainPanel(
-  h3("Voila"),
-  verbatimTextOutput("id1"),
-  h4("Doh!"),
-  verbatimTextOutput("calc1")
+        h3("Calculated BMI:"),
+        verbatimTextOutput("bmi"),
+        h4("Description"),
+        verbatimTextOutput("bmidescription"),
+        h5("Plotted"),
+        plotOutput("plot")
     )
   )
 )
