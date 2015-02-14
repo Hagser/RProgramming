@@ -3,12 +3,12 @@ library(shiny)
 shinyUI(
   pageWithSidebar(
   headerPanel("Calculate BMI (body mass index)!"),
-  sidebarPanel(
-      numericInput('weight',"Weight (lbs or kg)",75,min=30,max=500,step=5),
+  sidebarPanel(        
+      sliderInput('weight',"Weight (lbs or kg)",75,min=30,max=500,step=1),
       radioButtons("wtype","Lbs or kg",choices = c("Lbs","kg"),selected = "kg"),
-      numericInput('height',"Height (feet, cm or inches)",175,min=30,max=200,step=5),
-      radioButtons("htype","Feet, cm or inches",choices = c("Feet","cm","Inches"),selected = "cm"),
-      submitButton("Send")
+      sliderInput('height',"Height (feet, cm or inches)",175,min=30,max=220,step=1),
+      radioButtons("htype","cm or inches",choices = c("cm","Inches"),selected = "cm")
+      #,submitButton("Send")
     )
   ,
   mainPanel(
