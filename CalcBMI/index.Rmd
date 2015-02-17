@@ -26,8 +26,8 @@ The purpose of this application is to be able to easily calculate your BMI (body
 --- .class #id 
 
 
-## Posibilities
-1. It is posible to choose weight units pounds (Lbs) or kilograms (kg).
+## Possibilities
+1. It is possible to choose weight units pounds (Lbs) or kilograms (kg).
 2. You have the same option for height units cm (centimeters) or inches.
 
 --- .class #id 
