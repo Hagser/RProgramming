@@ -8,7 +8,6 @@ shinyUI(
         sliderInput('weight',"Weight (lbs or kg)",75,min=30,max=500,step=1),
         radioButtons("htype","cm or inches",choices = c("cm","Inches"),selected = "cm"),
         sliderInput('height',"Height (cm or inches)",175,min=30,max=220,step=1)
-      #,submitButton("Send")
     )
   ,
   mainPanel(
@@ -16,7 +15,6 @@ shinyUI(
         verbatimTextOutput("bmi"),
         h4("Description"),
         verbatimTextOutput("bmidescription"),
-        h5("Plotted"),
         plotOutput("plot",width = 480)
     )
   )
