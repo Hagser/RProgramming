@@ -5,4 +5,5 @@
 *.Rproj
 *.pper
 */.Rproj.user/*
-*/CalcBMI/*
+*CalcBMI/*
+courses
