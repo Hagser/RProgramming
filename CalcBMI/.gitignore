@@ -1,5 +1,6 @@
 *.txt
 *.zip
+*.bak
 *.RData
 *.Rhistory
 *.Rproj
