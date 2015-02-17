@@ -5,5 +5,3 @@
 *.Rproj
 *.pper
 */.Rproj.user/*
-*.cache*
-courses

@@ -1,0 +1,86 @@
+---
+title       : Calculate BMI shinyapp
+subtitle    : 
+author      : Johan Hagsér
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## What is BMI (body mass index)?
+The body mass index (BMI), or Quetelet index, is a measure of relative size based on the mass and height of an individual.
+
+The index was devised by Adolphe Quetelet during the course of developing what he called "social physics", between 1830 and 1850.[2] The BMI for a person is defined as their body mass divided by the square of their height—with the value universally being given in units of kg/m2
+
+
+--- .class #id 
+
+
+## Purpose
+The purpose of this application is to be able to easily calculate your BMI (body mass index).
+
+--- .class #id 
+
+
+## Posibilities
+1. It is posible to choose weight units pounds (Lbs) or kilograms (kg).
+2. You have the same option for height units cm (centimeters) or inches.
+
+--- .class #id 
+
+## Graph
+A graph is calculated based on selected units, drawing a dot where the users calculated bmi is located in the graph.<br/>
+```{r,echo=FALSE}
+source(file = "functions.R")
+wtype<-"Lbs"
+weig<-150
+heig<-180
+htype<-"cm"
+groups<-c(0,15,16,18.5,25,30,35,40,Inf)
+plot(weig,heig,
+     xlab=paste("Weight (",wtype,")",sep=""),
+     ylab=paste("Height (",htype,")",sep=""),main="You are the dot!",
+     xlim=c(converttow(30,wtype),converttow(200,wtype)),
+     ylim=c(converttoh(90,htype),converttoh(220,htype)),type="n")
+
+dafr <- data.frame(w=NULL,h=NULL,calc=NULL)
+for(we in seq(from = 30, to = 200, by = 3))
+{
+      for(he in seq(from = 90, to = 220, by = 3))
+      {
+            ca<-calc(we,he)
+            
+            if((ca<=70 && ca>0) | any(groups==ca))
+            {
+                  dafr<-rbind(dafr,data.frame(w=converttow(we,wtype),h=converttoh(he,htype),calc=ca))
+            }
+      }
+}
+linwid<-8
+s1<-dafr[dafr$calc>groups[1] & dafr$calc<groups[2],]      
+lines(s1$w,s1$h,type="l", col="red",lwd = linwid)
+s1<-dafr[dafr$calc>groups[2] & dafr$calc<groups[4],]      
+lines(s1$w,s1$h,type="l", col="yellow",lwd = linwid)
+s1<-dafr[dafr$calc>groups[4] & dafr$calc<groups[5],]      
+lines(s1$w,s1$h,type="l", col="green",lwd = linwid)
+s1<-dafr[dafr$calc>groups[5] & dafr$calc<groups[7],]      
+lines(s1$w,s1$h,type="l", col="yellow",lwd = linwid)
+s1<-dafr[dafr$calc>groups[7],]      
+lines(s1$w,s1$h,type="l", col="red",lwd = linwid)
+
+points(weig,heig,pch=19,lwd = 3,col="blue")
+abline(h = heig)
+abline(v = weig)
+```
+
+
+--- .class #id 
+
+## Sources and links
+Information about bmi and unit conversion have been found at: http://www.wikipedia.com<br/>
+The app can be used located here: http://hagser.shinyapps.io/09_DevelopingDataProducts
+
