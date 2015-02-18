@@ -1,9 +1,42 @@
 library(shiny)
 source(file = "functions.R")
 shinyServer(
-      
-      function(input,output)
+      function(input,output, session)
       {
+            cntw<<-0
+            cnth<<-0
+            observeEvent(input$wtype,{
+                  wtype<-input$wtype
+                  weig<-input$weight
+                  cweig<-weig
+                  if(wtype=="Lbs")
+                  {
+                        cweig<-converttow(weig,wtype)
+                  }
+                  else if(cntw>0)
+                  {
+                        cweig<-convertw(weig,"Lbs")
+                  }
+                  
+                  cntw<<-cntw+1
+                  updateSliderInput(session,inputId = "weight",value =cweig,min=converttow(30,wtype),max=converttow(200,wtype))
+            })
+            observeEvent(input$htype,{
+                  htype<-input$htype
+                  heig<-input$height
+                  cheig<-heig
+                  if(htype=="Inches")
+                  {
+                        cheig<-converttoh(heig,htype)
+                  }
+                  else if(cnth>0)
+                  {
+                        cheig<-converth(heig,"Inches")
+                  }
+                  
+                  cnth<<-cnth+1
+                  updateSliderInput(session,inputId = "height",value = cheig,min=converttoh(90,htype),max=converttoh(240,htype))
+            })
             output$bmi<-renderPrint({calc(input$weight,input$height,input$wtype,input$htype)})
             output$bmidescription<-renderPrint({describe(calc(input$weight,input$height,input$wtype,input$htype))})
             output$plot<-renderPlot({
@@ -11,6 +44,7 @@ shinyServer(
                   htype<-input$htype
                   weig<-input$weight
                   heig<-input$height
+                        
                   #plot the boundries for the different BMI classes.
                   groups<-c(0,15,16,18.5,25,30,35,40,Inf)
                   plot(weig,heig,

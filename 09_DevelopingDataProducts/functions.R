@@ -2,7 +2,7 @@ convertw<-function(weight,wtype=""){
       wval<-weight
       if(wtype=="Lbs")
       {
-            wval<-(weight*0.45359237)
+            wval<-round((weight*0.45359237),0)
       }
       return(wval)      
 }
@@ -10,11 +10,11 @@ converth<-function(height,htype=""){
       hval<-height
       if(htype=="Feet")
       {
-            hval<-(height*30.48)
+            hval<-round((height*30.48),0)
       }
       if(htype=="Inches")
       {
-            hval<-(height*2.54)
+            hval<-round((height*2.54),0)
       }
       return(hval)
 }
@@ -22,7 +22,7 @@ converttow<-function(weight,wtype=""){
       wval<-weight
       if(wtype=="Lbs")
       {
-            wval<-(weight*2.204622621848)
+            wval<- round((weight*2.204622621848),0)
       }
       return(wval)      
 }
@@ -30,11 +30,11 @@ converttoh<-function(height,htype=""){
       hval<-height
       if(htype=="Feet")
       {
-            hval<-(height/30.48)
+            hval<-round((height/30.48),0)
       }
       if(htype=="Inches")
       {
-            hval<-(height*0.39370078740157)
+            hval<-round((height*0.39370078740157),0)
       }
       return(hval)
 }
